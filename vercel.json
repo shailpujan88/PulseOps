@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "experimental": {
+    "services": {
+      "frontend": {
+        "src": "frontend",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "build"
+        }
+      },
+      "backend": {
+        "src": "backend",
+        "use": "@vercel/node"
+      }
+    }
+  }
+}
