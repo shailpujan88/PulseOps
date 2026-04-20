@@ -8,14 +8,23 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server, {
   cors: {
-    origin: true,
+    origin: ["http://localhost:3000", "http://localhost:5173", "https://pulse-ops-five.vercel.app", "https://pulseops-1.onrender.com"],
     methods: ["GET", "POST"]
   },
   path: "/socket.io"
 });
 
-app.use(cors());
+app.use(cors({
+  origin: ["http://localhost:3000", "http://localhost:5173", "https://pulse-ops-five.vercel.app", "https://pulseops-1.onrender.com"],
+  credentials: true
+}));
+
 app.use(express.json());
+
+// Root route
+app.get('/', (req, res) => {
+  res.json({ status: 'PulseOps Backend Running', version: '1.0.0' });
+});
 
 // Routes
 app.get('/api/stores', (req, res) => {
